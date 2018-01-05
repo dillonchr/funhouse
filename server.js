@@ -1,11 +1,24 @@
 require('dotenv').config();
 const http = require('http');
+const auth = require('./components/auth');
 
 http
     .createServer((req, res) => {
-        console.log(req.url);
-        res.writeHead(200, {'Content-Type': 'application/json'});
-        res.end(Date.now().toString(), 'utf-8');
+        auth.isTokenValid(req.headers['x-api-token'])
+            .then(isValid => {
+                let status, reply;
+                
+                if (!isValid) {
+                    status = 401;
+                    reply = '{"error": true, "message": "Unauthorized access"}';
+                } else {
+                    status = 200;
+                    reply = Date.now().toString();
+                }
+
+                res.writeHead(status, {'Content-Type': 'application/json'});
+                res.end(reply, 'utf-8');
+            });
     })
     .listen(process.env.port);
 
