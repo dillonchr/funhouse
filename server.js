@@ -14,6 +14,9 @@ http
                 } else {
                     status = 200;
                     reply = Date.now().toString();
+                    switch(req.method) {
+                        //  http://www.restapitutorial.com/lessons/httpmethods.html
+                    }
                 }
 
                 res.writeHead(status, {'Content-Type': 'application/json'});
