@@ -19,7 +19,7 @@ module.exports = {
         return this.getDb().then(db => db.collection(name));
     },
     findItemInCollection(collection, searchOptions) {
-        this.getCollection(collection)
+        return this.getCollection(collection)
             .then(c => c.findOne(searchOptions))
             .then(obj => {
                 this.closeDb();

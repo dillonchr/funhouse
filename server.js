@@ -1,6 +1,8 @@
 require('dotenv').config();
 const http = require('http');
 const auth = require('./components/auth');
+const bookmancy = require('./components/bookmancy');
+const port = process.env.port || 3000;
 
 http
     .createServer((req, res) => {
@@ -12,17 +14,17 @@ http
                     status = 401;
                     reply = '{"error": true, "message": "Unauthorized access"}';
                 } else {
+                    if (/^\/books/.test(req.url)) {
+                        return bookmancy.handleRequest(req, res);
+                    }
                     status = 200;
                     reply = Date.now().toString();
-                    switch(req.method) {
-                        //  http://www.restapitutorial.com/lessons/httpmethods.html
-                    }
                 }
 
                 res.writeHead(status, {'Content-Type': 'application/json'});
                 res.end(reply, 'utf-8');
             });
     })
-    .listen(process.env.port);
+    .listen(port);
 
-console.log(`Server running at http://localhost:${process.env.port}/`);
+console.log(`Server running at http://localhost:${port}/`);
