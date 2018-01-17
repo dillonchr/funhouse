@@ -60,11 +60,10 @@ const getDom = url => {
 module.exports = (req, res) => getDom('https://gamesdonequick.com/schedule')
     .then(parsePage)
     .then(games => {
-        try {
-            res.writeHead(200, {'Content-Type': 'application/json'});
-            res.end(JSON.stringify(games), 'utf-8');
-        } catch (err) {
-            res.writeHead(500, {'Content-Type': 'application/json'});
-            res.end('{"error":true,"message":"Server error"}');
-        }
+        res.writeHead(200, {'Content-Type': 'application/json'});
+        res.end(JSON.stringify(games), 'utf-8');
+    })
+    .catch(() => {
+        res.writeHead(500, {'Content-Type': 'application/json'});
+        res.end('{"error":true,"message":"Server error"}');
     });
