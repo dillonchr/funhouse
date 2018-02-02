@@ -1,14 +1,18 @@
 require('dotenv').config();
 const port = process.env.port || 3000;
 const Errors = require('./utils/errors');
-const http = require('http');
+const https = require('https');
+const fs = require('fs');
 const auth = require('./components/auth');
 const bookmancy = require('./components/bookmancy');
 const gdq = require('./components/gdq');
 const sms = require('./components/sms');
 
-http
-    .createServer((req, res) => {
+https
+    .createServer({
+        key: fs.readFileSync(process.env.SSL_KEY_PATH),
+        cert: fs.readFileSync(process.env.SSL_CERT_PATH)
+    }, (req, res) => {
         auth.isTokenValid(req.headers['x-api-token'])
             .then(isValid => {
                 let status, reply;
@@ -36,4 +40,4 @@ http
     })
     .listen(port);
 
-console.log(`Server running at http://localhost:${port}/`);
+console.log(`Server running at https://localhost:${port}/`);
