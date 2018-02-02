@@ -1,4 +1,5 @@
 const { connect } = require('mongodb').MongoClient;
+const Errors = require('../utils/errors');
 
 module.exports = {
     client: null,
@@ -7,7 +8,8 @@ module.exports = {
             .then(client => {
                 this.client = client;
                 return client.db(process.env.mongodbname);
-            });
+            })
+            .catch(Errors.track);
     },
     closeDb() {
         if (this.client) {
@@ -29,6 +31,6 @@ module.exports = {
     hasItemInCollection(collection, searchOptions) {
         return this.findItemInCollection(collection, searchOptions)
             .then(item => !!item)
-            .catch(err => !!console.error('DATABASE Exception:', err));
+            .catch(Errors.track);
     }
 };

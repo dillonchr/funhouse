@@ -1,9 +1,11 @@
 require('dotenv').config();
 const port = process.env.port || 3000;
+const Errors = require('./utils/errors');
 const http = require('http');
 const auth = require('./components/auth');
 const bookmancy = require('./components/bookmancy');
 const gdq = require('./components/gdq');
+const sms = require('./components/sms');
 
 http
     .createServer((req, res) => {
@@ -12,6 +14,9 @@ http
                 let status, reply;
 
                 if (!isValid) {
+                    if (/^\/text/.test(req.url)) {
+                        return sms(req, res);
+                    }
                     status = 401;
                     reply = '{"error": true, "message": "Unauthorized access"}';
                 } else {
