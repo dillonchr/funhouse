@@ -10,9 +10,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "async": "^2.6.0",
     "bookmancy": "^1.0.3",
     "dotenv": "^4.0.0",
-    "jsdom": "^9.9.1",
+    "jsdom": "^9.12.0",
     "moment": "^2.20.1",
     "mongodb": "^3.0.2",
     "node-bandwidth": "^2.6.1",

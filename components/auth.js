@@ -1,9 +1,7 @@
 const db = require('./database');
 
-const auth = {
-    isTokenValid(token) {
-        return db.hasItemInCollection('authorized_apps', {token});
+module.exports = {
+    isTokenValid(token, onResponse) {
+        db.hasItemInCollection('authorized_apps', {token}, onResponse);
     }
 };
-
-module.exports = auth;

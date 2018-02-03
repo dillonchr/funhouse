@@ -1,36 +1,91 @@
 const { connect } = require('mongodb').MongoClient;
 const Errors = require('../utils/errors');
 
+const defaultBooleanRes = (err, didSucceed) => {};
+
 module.exports = {
     client: null,
-    getDb() {
-        return connect(decodeURI(process.env.mongouri))
-            .then(client => {
-                this.client = client;
-                return client.db(process.env.mongodbname);
-            })
-            .catch(Errors.track);
-    },
-    closeDb() {
+    autoCloseDbTimer: null,
+    getDb(onResponse) {
+        clearTimeout(this.autoCloseDbTimer);
+        this.autoCloseDbTimer = setTimeout(() => this.closeDb(), 5000);
         if (this.client) {
-            this.client.close()
-                .then(() => this.client = null);
+            onResponse(null, this.client.db(process.env.mongodbname));
+        } else {
+            connect(decodeURI(process.env.mongouri), (err, client) => {
+                if (err) {
+                    Errors.track(err);
+                    onResponse(err);
+                } else {
+                    this.client = client;
+                    onResponse(null, client.db(process.env.mongodbname));
+                }
+            });
         }
     },
-    getCollection(name) {
-        return this.getDb().then(db => db.collection(name));
-    },
-    findItemInCollection(collection, searchOptions) {
-        return this.getCollection(collection)
-            .then(c => c.findOne(searchOptions))
-            .then(obj => {
-                this.closeDb();
-                return obj;
+    closeDb(onResponse = defaultBooleanRes) {
+        if (this.client) {
+            this.client.close(false, err => {
+                if (err) {
+                    Errors.track(err);
+                } else {
+                    this.client = null;
+                }
+                onResponse(err);
             });
+        }
     },
-    hasItemInCollection(collection, searchOptions) {
-        return this.findItemInCollection(collection, searchOptions)
-            .then(item => !!item)
-            .catch(Errors.track);
+    getCollection(name, onResponse) {
+        this.getDb((err, db) => {
+            if (err) {
+                onResponse(err);
+            } else {
+                db.collection(name, onResponse);
+            }
+        })
+    },
+    findDocumentsInCollection(collection, search = {}, onResponse) {
+        this.getCollection(collection, (err, coll) => {
+            if (err) {
+                onResponse(err);
+            } else {
+                coll.find(search).toArray(onResponse);
+            }
+        });
+    },
+    getAllDocumentsInCollection(name, onResponse) {
+        this.findDocumentsInCollection(name, {}, onResponse);
+    },
+    insertMany(collection, documents, onResponse = defaultBooleanRes) {
+        this.getCollection(collection, (err, coll) => {
+            if (err) {
+                onResponse(err);
+            } else {
+                coll.insertMany(documents, onResponse);
+            }
+        });
+    },
+    updateMany(collection, filter, update, onResponse = defaultBooleanRes) {
+        this.getCollection(collection, (err, coll) => {
+            if (err) {
+                onResponse(err);
+            } else {
+                coll.updateMany(filter, update, onResponse);
+            }
+        });
+    },
+    findItemInCollection(collection, searchOptions, onResponse) {
+        this.getCollection(collection, (err, coll) => {
+            if (err) {
+                onResponse(err);
+            } else {
+                coll.findOne(searchOptions, onResponse);
+            }
+        });
+    },
+    hasItemInCollection(collection, searchOptions, onResponse) {
+        this.findItemInCollection(collection, searchOptions, (err, item) => {
+            onResponse(err, !!item);
+        });
     }
 };
