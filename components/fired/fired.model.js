@@ -13,6 +13,6 @@ module.exports = {
         db.updateMany(COLLECTION_NAME, {name: {$in: employeeNames}}, update);
     },
     getFiredEmployees(onResponse) {
-        db.findDocumentsInCollection(COLLECTION_NAME, {fired: true}, onResponse);
+        db.findDocumentsInCollection(COLLECTION_NAME, {fired:true}, {sort:{fireDate: -1}}, onResponse);
     }
 };

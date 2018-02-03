@@ -44,17 +44,17 @@ module.exports = {
             }
         })
     },
-    findDocumentsInCollection(collection, search = {}, onResponse) {
+    findDocumentsInCollection(collection, search = {}, options = {}, onResponse) {
         this.getCollection(collection, (err, coll) => {
             if (err) {
                 onResponse(err);
             } else {
-                coll.find(search).toArray(onResponse);
+                coll.find(search, options).toArray(onResponse);
             }
         });
     },
     getAllDocumentsInCollection(name, onResponse) {
-        this.findDocumentsInCollection(name, {}, onResponse);
+        this.findDocumentsInCollection(name, {}, {}, onResponse);
     },
     insertMany(collection, documents, onResponse = defaultBooleanRes) {
         this.getCollection(collection, (err, coll) => {

@@ -21,7 +21,7 @@ http
                     reply = '{"error":true,"message":"Unauthorized access"}';
                 } else {
                     if (/^\/fired/.test(req.url)) {
-                        return fired(req, res);
+                        return fired.api(req, res);
                     }
                     if (/^\/books/.test(req.url)) {
                         return bookmancy(req, res);
