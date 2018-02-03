@@ -1,6 +1,6 @@
 const body = require('../../utils/body');
 const sms = require('./sender');
-const inflation = require('../inflation/inflation');
+const inflation = require('../inflation/sms');
 
 module.exports = (req, res) => {
     body(req, (err, data) => {

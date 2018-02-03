@@ -6,6 +6,7 @@ const bookmancy = require('./components/bookmancy');
 const gdq = require('./components/gdq');
 const sms = require('./components/sms');
 const fired = require('./components/fired');
+const inflation = require('./components/inflation');
 
 http
     .createServer((req, res) => {
@@ -27,6 +28,9 @@ http
                     }
                     if (/^\/gdq/.test(req.url)) {
                         return gdq(req, res);
+                    }
+                    if (/^\/inflation/.test(req.url)) {
+                        return inflation(req, res);
                     }
                     status = 200;
                     reply = Date.now().toString();

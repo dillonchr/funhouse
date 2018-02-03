@@ -9,7 +9,7 @@ const client = new Bandwidth({
 module.exports = {
     send(to, text) {
         return client.Message.send({
-            from: '+19182367810',
+            from: process.env.BANDWIDTH_PHONE_NUMBER,
             to,
             text
         })
