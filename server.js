@@ -30,7 +30,7 @@ http
                         return gdq.api(req, res);
                     }
                     if (/^\/inflation/.test(req.url)) {
-                        return inflation(req, res);
+                        return inflation.api(req, res);
                     }
                     status = 200;
                     reply = Date.now().toString();
