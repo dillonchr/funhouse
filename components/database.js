@@ -4,7 +4,7 @@ const Errors = require('../utils/errors');
 module.exports = {
     client: null,
     getDb() {
-        return connect(process.env.mongouri)
+        return connect(process.env.mongouri, {uri_decode_auth: true})
             .then(client => {
                 this.client = client;
                 return client.db(process.env.mongodbname);
