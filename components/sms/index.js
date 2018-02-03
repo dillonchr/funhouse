@@ -1,6 +1,7 @@
 const body = require('../../utils/body');
 const sms = require('./sender');
 const inflation = require('../inflation/sms');
+const gdq = require('../gdq');
 
 module.exports = (req, res) => {
     body(req, (err, data) => {
@@ -9,8 +10,8 @@ module.exports = (req, res) => {
             if (applicationId === process.env.BANDWIDTH_APP_ID) {
                 if (/how much (was|is) /i.test(text)) {
                     sms.send(from, inflation(text));
-                } else {
-                    console.log(from, text);
+                } else if (/gdq/i.test(text)) {
+                    gdq.sms(text => sms.send(from, text));
                 }
             }
         } else {

@@ -27,7 +27,7 @@ http
                         return bookmancy(req, res);
                     }
                     if (/^\/gdq/.test(req.url)) {
-                        return gdq(req, res);
+                        return gdq.api(req, res);
                     }
                     if (/^\/inflation/.test(req.url)) {
                         return inflation(req, res);
