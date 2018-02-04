@@ -7,6 +7,7 @@ const gdq = require('./components/gdq');
 const fired = require('./components/fired');
 const inflation = require('./components/inflation');
 const paycheck = require('./components/paycheck');
+const budget = require('./components/budget');
 
 http
     .createServer((req, res) => {
@@ -26,6 +27,9 @@ http
                 }
                 if (/^\/paycheck/.test(req.url)) {
                     return paycheck(req, res);
+                }
+                if (/^\/budget/.test(req.url)) {
+                    return budget(req, res);
                 }
             }
             const status = err ? 500 : (isValid ? 200 : 401);
