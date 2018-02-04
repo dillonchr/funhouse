@@ -74,6 +74,15 @@ module.exports = {
             }
         });
     },
+    replaceDocument(collection, search, document, onResponse) {
+        this.getCollection(collection, (err, coll) => {
+            if (err) {
+                onResponse(err);
+            } else {
+                coll.update(search, document, onResponse);
+            }
+        });
+    },
     findItemInCollection(collection, searchOptions, onResponse) {
         this.getCollection(collection, (err, coll) => {
             if (err) {

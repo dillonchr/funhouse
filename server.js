@@ -6,6 +6,7 @@ const bookmancy = require('./components/bookmancy');
 const gdq = require('./components/gdq');
 const fired = require('./components/fired');
 const inflation = require('./components/inflation');
+const paycheck = require('./components/paycheck');
 
 http
     .createServer((req, res) => {
@@ -22,6 +23,9 @@ http
                 }
                 if (/^\/inflation/.test(req.url)) {
                     return inflation(req, res);
+                }
+                if (/^\/paycheck/.test(req.url)) {
+                    return paycheck(req, res);
                 }
             }
             const status = err ? 500 : (isValid ? 200 : 401);
