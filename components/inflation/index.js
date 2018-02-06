@@ -1,5 +1,5 @@
 const inflation = require('./inflation');
-const Errors = require('../../utils/errors');
+const { toError, sendResponse } = require('../../utils');
 
 module.exports = (req, res) => {
     const [ year, dollars ] = req.url.split('/').slice(2);
@@ -8,7 +8,6 @@ module.exports = (req, res) => {
         valueThen: inflation(dollars, year),
         valueNow: dollars,
         year
-    } : {error:true,message:'missing year or dollar `/inflation/year/dollars`'};
-    res.writeHead(status, {'Content-Type': 'application/json'});
-    res.end(JSON.stringify(data), 'utf-8');
+    } : toError('missing year or dollar `/inflation/year/dollars`');
+    sendResponse(res, status, data);
 };

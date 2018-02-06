@@ -1,5 +1,4 @@
-const db = require('../../utils/database');
-const Errors = require('../../utils/errors');
+const { db, errors } = require('../../utils');
 const COLLECTION_NAME = 'budget';
 const BASE_BUDGET = 100;
 
@@ -8,7 +7,7 @@ const onBalanceResponse = res => (err, user) => {
         err = new Error('no budget found for requested id');
     }
     if (err) {
-        Errors.track(err);
+        errors.track(err);
         res(err);
     } else {
         res(null, user.transactions.reduce((s, c) => s - c.price, BASE_BUDGET));
@@ -27,7 +26,7 @@ module.exports = {
                 err = new Error(`no budget found for requested id ${id}`);
             }
             if (err) {
-                Errors.track(err);
+                errors.track(err);
                 onResponse(err);
             } else {
                 data.transactions.push(transaction);

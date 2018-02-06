@@ -1,4 +1,4 @@
-const db = require('../../utils/database');
+const { db } = require('../../utils');
 const COLLECTION_NAME = 'paycheck';
 
 const extractRemainingBalanceFromPaycheck = (paycheck) => {

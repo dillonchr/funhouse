@@ -1,6 +1,6 @@
 const moment = require('moment');
 const jsdom = require('jsdom');
-const Errors = require('../../utils/errors');
+const { errors } = require('../../utils');
 
 const SCHEDULE_URL = 'https://gamesdonequick.com/schedule';
 
@@ -9,7 +9,7 @@ const getLocalMoment = d => moment(d).utcOffset(`-0${new Date().getMonth() ? 5 :
 module.exports = onResponse => {
     jsdom.env(SCHEDULE_URL, (err, window) => {
         if (err) {
-            Errors.track(err);
+            errors.track(err);
             onResponse(err);
         } else {
             const pendingRuns = [...window.document.querySelectorAll('#runTable tbody tr')]

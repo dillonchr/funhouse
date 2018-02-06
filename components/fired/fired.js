@@ -1,6 +1,6 @@
 const jsdom = require('jsdom');
 const async = require('async');
-const Errors = require('../../utils/errors');
+const { errors } = require('../../utils');
 const model = require('./fired.model');
 
 const getCurrentRoster = onResponse => {
@@ -17,17 +17,17 @@ const getCurrentRoster = onResponse => {
                     }));
                 if (!roster || !roster.length) {
                     const schemaError = new Error('schema error: roster empty');
-                    Errors.track(schema);
+                    errors.track(schema);
                     onResponse(schemaError);
                 } else {
                     onResponse(null, roster);
                 }
             } catch (scrapeError) {
-                Errors.track(scrapeError);
+                errors.track(scrapeError);
                 onResponse(scrapeError);
             }
         } else {
-            Errors.track(err);
+            errors.track(err);
             onResponse(err);
         }
     });

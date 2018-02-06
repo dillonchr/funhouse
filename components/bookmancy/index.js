@@ -1,11 +1,5 @@
 const getBookmancyResults = require('./bookmancy');
-const getBody = require('../../utils/body');
-const toError = require('../../utils/to-error');
-
-const sendResponse = (res, status, data) => {
-    res.writeHead(status, {'Content-Type': 'application/json'});
-    res.end(JSON.stringify(data), 'utf-8');
-};
+const { getBody, toError, sendResponse } = require('../../utils');
 
 module.exports = (req, res) => {
     getBody(req, (err, data) => {

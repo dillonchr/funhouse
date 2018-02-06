@@ -8,7 +8,8 @@ const fired = require('./components/fired');
 const inflation = require('./components/inflation');
 const paycheck = require('./components/paycheck');
 const budget = require('./components/budget');
-const toError = require('./utils/to-error');
+const cryptonics = require('./components/cryptonics');
+const { toError } = require('./utils');
 
 http
     .createServer((req, res) => {
@@ -31,6 +32,9 @@ http
                 }
                 if (/^\/budget/.test(req.url)) {
                     return budget(req, res);
+                }
+                if (/^\/cryptonics/.test(req.url)) {
+                    return cryptonics(req, res);
                 }
             }
             const status = err ? 500 : (isValid ? 200 : 401);
