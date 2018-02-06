@@ -1,4 +1,4 @@
-const db = require('../database');
+const db = require('../../utils/database');
 const Errors = require('../../utils/errors');
 const COLLECTION_NAME = 'budget';
 const BASE_BUDGET = 100;

@@ -1,5 +1,5 @@
 const { connect } = require('mongodb').MongoClient;
-const Errors = require('../utils/errors');
+const Errors = require('./errors');
 
 const defaultBooleanRes = (err, didSucceed) => {};
 
