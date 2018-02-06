@@ -9,6 +9,7 @@ const inflation = require('./components/inflation');
 const paycheck = require('./components/paycheck');
 const budget = require('./components/budget');
 const cryptonics = require('./components/cryptonics');
+const dailytext = require('./components/dailytext');
 const { toError } = require('./utils');
 
 http
@@ -35,6 +36,9 @@ http
                 }
                 if (/^\/cryptonics/.test(req.url)) {
                     return cryptonics(req, res);
+                }
+                if (/^\/dailytext/.test(req.url)) {
+                    return dailytext(req, res);
                 }
             }
             const status = err ? 500 : (isValid ? 200 : 401);
