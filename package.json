@@ -16,7 +16,7 @@
     "jsdom": "^9.12.0",
     "moment": "^2.20.1",
     "mongodb": "^3.0.2",
-    "node-bandwidth": "^2.6.1",
+    "node-bandwidth": "^2.6.2",
     "raven": "^2.4.0"
   }
 }

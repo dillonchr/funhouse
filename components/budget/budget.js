@@ -4,7 +4,9 @@ const COLLECTION_NAME = 'budget';
 const BASE_BUDGET = 100;
 
 const onBalanceResponse = res => (err, user) => {
-    console.log('onResponse with bal', err); 
+    if (!user && !err) {
+        err = new Error('no budget found for requested id');
+    }
     if (err) {
         Errors.track(err);
         res(err);
@@ -21,6 +23,9 @@ module.exports = {
     },
     bought(id, transaction, onResponse) {
         db.findItemInCollection(COLLECTION_NAME, getSearch(id), (err, data) => {
+            if (!data && !err) {
+                err = new Error(`no budget found for requested id ${id}`);
+            }
             if (err) {
                 Errors.track(err);
                 onResponse(err);
@@ -35,4 +40,4 @@ module.exports = {
     reset(onResponse) {
 
     }
-}
+};
