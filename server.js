@@ -8,6 +8,7 @@ const fired = require('./components/fired');
 const inflation = require('./components/inflation');
 const paycheck = require('./components/paycheck');
 const budget = require('./components/budget');
+const toError = require('./utils/to-error');
 
 http
     .createServer((req, res) => {
@@ -33,7 +34,7 @@ http
                 }
             }
             const status = err ? 500 : (isValid ? 200 : 401);
-            const data = err ? {error:true,message:err.message} : (isValid ? {} : {error:true,message:'unauthorized'});
+            const data = err ? toError(err.message) : (isValid ? {} : toError('unauthorized'));
             res.writeHead(status, {'Content-Type': 'application/json'});
             res.end(JSON.stringify(data), 'utf-8');
         });
