@@ -12,7 +12,7 @@ module.exports = onResponse => {
                 const month = (now.getMonth() + 1).toString().padStart(2, '0');
                 const day = (now.getDate()).toString().padStart(2, '0');
                 const year = now.getFullYear();
-                const text = window.document.querySelector(`[data-date^="${year}-${month}-${day}"]`);
+                const text = window.document.querySelector(`[data-date^="${year}-${month}-${day}"], [data-date]:last-of-type`);
                 const themeScriptureRaw = text.querySelector('.themeScrp > em').textContent.trim();
 
                 onResponse(null, {
