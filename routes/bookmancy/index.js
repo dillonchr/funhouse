@@ -14,3 +14,5 @@ module.exports = (req, res) => {
         }
     });
 };
+
+module.exports.shouldRoute = req => /^\/books/.test(req.url);

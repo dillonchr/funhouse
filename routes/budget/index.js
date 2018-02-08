@@ -29,3 +29,5 @@ module.exports = (req, res) => {
         });
     }
 };
+
+module.exports.shouldRoute = req => req.hasAccess('paycheck') && /^\/budget/.test(req.url);

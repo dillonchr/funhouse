@@ -15,3 +15,5 @@ module.exports = (req, res) => {
         }
     });
 };
+
+module.exports.shouldRoute = req => /^\/cryptonics/.test(req.url);

@@ -11,3 +11,5 @@ module.exports = (req, res) => {
     } : toError('missing year or dollar `/inflation/year/dollars`');
     sendResponse(res, status, data);
 };
+
+module.exports.shouldRoute = req => /^\/inflation/.test(req.url);

@@ -9,3 +9,5 @@ module.exports = (req, res) => {
         sendResponse(res, status, data);
     });
 };
+
+module.exports.shouldRoute = req => /^\/fired/.test(req.url);

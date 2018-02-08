@@ -24,3 +24,5 @@ module.exports = (req, res) => {
         });
     }
 };
+
+module.exports.shouldRoute = req => req.hasAccess('paycheck') && /^\/paycheck/.test(req.url);

@@ -9,3 +9,4 @@ module.exports = (req, res) => {
     });
 };
 
+module.exports.shouldRoute = req => /^\/dailytext/.test(req.url);
