@@ -1,5 +1,5 @@
 const { db } = require('../../utils');
-const COLLECTION_NAME = 'employees';
+const COLLECTION_NAME = 'ca-employees';
 
 module.exports = {
     getEmployees(onResponse) {
