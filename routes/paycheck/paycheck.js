@@ -1,4 +1,6 @@
-const { db } = require('../../utils');
+const async = require('async');
+const {db} = require('../../utils');
+const budget = require('../budget/budget');
 const COLLECTION_NAME = 'paycheck';
 
 const extractRemainingBalanceFromPaycheck = (paycheck) => {
@@ -31,12 +33,16 @@ module.exports = {
             }
         });
     },
-    reset(amount = 2656.65, onResponse) {
+    reset(amount = 2736.27, onResponse) {
         const paycheck = {
             balance: amount,
             transactions: []
         };
-        db.replaceDocument(COLLECTION_NAME, {}, paycheck, err => {
+
+        async.series([
+            fn => db.replaceDocument(COLLECTION_NAME, {}, paycheck, fn),
+            fn => budget.reset(fn)
+        ], err => {
             if (err) {
                 onResponse(err);
             } else {
