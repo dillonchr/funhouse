@@ -46,7 +46,7 @@ module.exports = {
                     const balance = user.transactions.reduce((s, c) => s - c.price, BASE_BUDGET) * -1;
                     const transactions = [];
                     if (balance < 0) {
-                        transactions.push({description: 'Rollover', amount: balance > 0 ? balance * -1 : 0});
+                        transactions.push({description: 'Rollover', price: balance});
                     }
                     return {...user, transactions};
                 });
