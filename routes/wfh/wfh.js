@@ -21,7 +21,7 @@ module.exports = callback => {
             callback(err);
         } else {
             const who = messages
-                .filter(m => !m.flags.includes('\\Seen') && /wfh/i.test(m.title) && ['john.webb@kalibrate.com', 'connie.sharpe@kalibrate.com'].includes(m.from.address.toLowerCase()))
+                .filter(m => !m.flags.includes('\\Seen') && /wfh/i.test(m.title))
                 .map(m => m.from.address.split('@').shift())
                 .filter((who, i, a) => a.indexOf(who) === i);
             if (who.length) {
