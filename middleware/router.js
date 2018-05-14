@@ -6,6 +6,7 @@ const paycheck = require('../routes/paycheck');
 const budget = require('../routes/budget');
 const cryptonics = require('../routes/cryptonics');
 const dailytext = require('../routes/dailytext');
+const wfh = require('../routes/wfh');
 const { toError } = require('../utils');
 
 module.exports = (req, res) => {
@@ -32,6 +33,9 @@ module.exports = (req, res) => {
     }
     if (dailytext.shouldRoute(req)) {
         return dailytext(req, res);
+    }
+    if (wfh.shouldRoute(req)) {
+        return wfh(req, res);
     }
     res.writeHead(404, {'Content-Type': 'application/json'});
     res.end(JSON.stringify(toError(`no available handler for "${req.url}"`)));

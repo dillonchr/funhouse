@@ -17,7 +17,7 @@ const getCurrentRoster = onResponse => {
                     }));
                 if (!roster || !roster.length) {
                     const schemaError = new Error('schema error: roster empty');
-                    errors.track(schema);
+                    errors.track(schemaError);
                     onResponse(schemaError);
                 } else {
                     onResponse(null, roster);
