@@ -1,3 +1,4 @@
+const async = require('async');
 const {db, errors} = require('../../utils');
 const COLLECTION_NAME = 'budget';
 const BASE_BUDGET = 100;
@@ -50,13 +51,9 @@ module.exports = {
                     }
                     return {...user, transactions};
                 });
-                resetDocs.forEach(doc => {
-                    db.replaceDocument(COLLECTION_NAME, {_id: doc._id}, doc, (err) => {
-                        if (err) {
-                            errors.track(err);
-                        }
-                    });
-                });
+                async.series(resetDocs.map(doc => {
+                    return fn => db.replaceDocument(COLLECTION_NAME, {_id: doc._id}, doc, fn);
+                }), onResponse);
             }
         });
     }
