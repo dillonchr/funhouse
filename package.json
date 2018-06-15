@@ -10,15 +10,15 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "async": "^2.6.0",
+    "async": "^2.6.1",
     "bookmancy": "^1.0.3",
-    "connect": "^3.6.5",
+    "connect": "^3.6.6",
     "dotenv": "^4.0.0",
     "inbox": "^1.1.59",
     "jsdom": "^9.12.0",
-    "moment": "^2.20.1",
-    "mongodb": "^3.0.2",
-    "node-bandwidth": "^2.6.2",
-    "raven": "^2.4.0"
+    "moment": "^2.22.2",
+    "mongodb": "^3.0.10",
+    "node-bandwidth": "^2.6.5",
+    "raven": "^2.6.2"
   }
 }
