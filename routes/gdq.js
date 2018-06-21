@@ -1,5 +1,5 @@
-const gdq = require('./gdq');
-const { toError, sendResponse } = require('../../utils');
+const gdq = require('@dillonchr/gdq');
+const {toError, sendResponse} = require('../utils');
 
 module.exports = (req, res) => {
     gdq((err, games) => {

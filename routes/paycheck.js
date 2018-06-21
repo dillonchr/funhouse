@@ -1,5 +1,5 @@
-const paycheck = require('./paycheck');
-const { toError, sendResponse } = require('../../utils');
+const {paycheck} = require('@dillonchr/bankrupt');
+const {toError, sendResponse} = require('../utils');
 
 const onBalanceResponse = res => (err, balance) => {
     const status = err ? 500 : 200;
@@ -9,7 +9,7 @@ const onBalanceResponse = res => (err, balance) => {
 
 module.exports = (req, res) => {
     if (req.method === 'GET' || !req.body) {
-        paycheck.getBalance(onBalanceResponse(res));
+        paycheck.balance(onBalanceResponse(res));
     } else {
         if (req.body.reset) {
             paycheck.reset(req.body.balance, onBalanceResponse(res));
