@@ -1,5 +1,5 @@
-const wfh = require('./wfh');
-const {toError, sendResponse, errors} = require('../../utils');
+const wfh = require('@dillonchr/wfh');
+const {toError, sendResponse, errors} = require('../utils');
 
 module.exports = (req, res) => {
     wfh((err, results) => {
