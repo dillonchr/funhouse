@@ -8,7 +8,7 @@
     "test": "echo \"Error: no test specified\""
   },
   "author": "",
-  "license": "ISC",
+  "license": "GPL-2.0",
   "dependencies": {
     "@dillonchr/bankrupt": "^1.0.0",
     "@dillonchr/bookmancy": "^2.0.0",
