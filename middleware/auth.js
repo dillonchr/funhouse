@@ -1,4 +1,5 @@
-const { db, toError, sendResponse } = require('../utils');
+const db = require('@dillonchr/ephemeraldb');
+const {toError, sendResponse} = require('../utils');
 
 const getUser = (token, onResponse) => db.findItemInCollection('authorized_apps', {token}, onResponse);
 

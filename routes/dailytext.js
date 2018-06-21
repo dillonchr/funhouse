@@ -1,5 +1,5 @@
-const dailytext = require('./dailytext');
-const { toError, sendResponse } = require('../../utils');
+const dailytext = require('@dillonchr/dailytext');
+const {toError, sendResponse} = require('../utils');
 
 module.exports = (req, res) => {
     dailytext((err, text) => {

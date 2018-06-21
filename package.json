@@ -4,21 +4,23 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server.js",
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\""
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "async": "^2.6.1",
-    "bookmancy": "^1.0.3",
+    "@dillonchr/bankrupt": "^1.0.0",
+    "@dillonchr/bookmancy": "^2.0.0",
+    "@dillonchr/cryptonics": "^1.0.0",
+    "@dillonchr/dailytext": "^1.0.0",
+    "@dillonchr/ephemeraldb": "^1.0.0",
+    "@dillonchr/fired": "^1.0.0",
+    "@dillonchr/gdq": "^1.0.0",
+    "@dillonchr/inflation": "^1.0.0",
+    "@dillonchr/wfh": "^1.0.1",
     "connect": "^3.6.6",
     "dotenv": "^4.0.0",
-    "inbox": "^1.1.59",
-    "jsdom": "^9.12.0",
-    "moment": "^2.22.2",
-    "mongodb": "^3.0.10",
-    "node-bandwidth": "^2.6.5",
     "raven": "^2.6.2"
   }
 }
