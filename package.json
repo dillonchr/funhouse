@@ -11,7 +11,7 @@
   "license": "GPL-2.0",
   "dependencies": {
     "@dillonchr/bankrupt": "^1.0.0",
-    "@dillonchr/bookmancy": "^2.0.0",
+    "@dillonchr/bookmancy": "^2.0.1",
     "@dillonchr/cryptonics": "^1.0.0",
     "@dillonchr/dailytext": "^1.0.0",
     "@dillonchr/ephemeraldb": "^1.0.0",
