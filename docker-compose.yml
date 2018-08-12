@@ -1,0 +1,22 @@
+version: '2'
+
+networks:
+  funhouse:
+    driver: bridge
+
+services:
+  funhouse:
+    env_file:
+      - .env
+    build: .
+    ports:
+      - "3000:3000"
+    networks:
+      - funhouse
+
+  mongodb:
+    image: 'bitnami/mongodb:3.6.6'
+    volumes:
+      - /data:/bitnami
+    networks:
+      - funhouse
