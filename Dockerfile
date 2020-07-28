@@ -1,6 +1,6 @@
 FROM mhart/alpine-node:10.7.0
 WORKDIR /code/
 COPY package*.json ./
-RUN npm i
+RUN npm i > /dev/null
 COPY . .
 CMD ["npm", "start"]
