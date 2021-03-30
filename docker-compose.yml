@@ -17,6 +17,6 @@ services:
   mongodb:
     image: 'bitnami/mongodb:3.6.6'
     volumes:
-      - /data:/bitnami
+      - /mnt/wisconsin/funhousedb:/bitnami
     networks:
       - funhouse
