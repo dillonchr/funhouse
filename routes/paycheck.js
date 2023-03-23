@@ -1,24 +1,27 @@
-const {paycheck} = require('@dillonchr/bankrupt');
-const {toError, sendResponse} = require('../utils');
+const paycheck = require("@dillonchr/bankrupt");
+const { toError, sendResponse } = require("../utils");
 
-const onBalanceResponse = res => (err, balance) => {
-    const status = err ? 500 : 200;
-    const data = err ? toError(err.message) : { balance: balance.toFixed(2) };
-    sendResponse(res, status, data);
+const onBalanceResponse = (res, balance) => {
+  sendResponse(res, 200, { balance: balance.toFixed(2) });
 };
 
 module.exports = (req, res) => {
-    if (req.method === 'GET' || !req.body) {
-        paycheck.balance(onBalanceResponse(res));
+  const id = req.url.substr(req.url.lastIndexOf("/") + 1);
+  if (null != id) {
+    if (req.method === "GET" || !req.body) {
+      onBalanceResponse(res, paycheck.balance(id));
     } else {
-        if (req.body.reset) {
-            paycheck.reset(req.body.balance, onBalanceResponse(res));
-        } else if (req.body.amount) {
-            paycheck.spend(req.body.amount, onBalanceResponse(res));
-        } else {
-            sendResponse(res, 400, toError('paycheck pay requires an amount'));
-        }
+      if (req.body.reset) {
+        onBalanceResponse(res, paycheck.reset(id, req.body.balance));
+      } else if (req.body.amount) {
+        onBalanceResponse(res, paycheck.spend(id, req.body.amount));
+      } else {
+        sendResponse(res, 400, toError("paycheck pay requires an amount"));
+      }
     }
+  }
 };
 
-module.exports.shouldRoute = req => req.hasAccess('paycheck') && /^\/paycheck/.test(req.url);
+module.exports.shouldRoute = req =>
+  req.hasAccess("paycheck") && /^\/paycheck/.test(req.url);
+module.exports.init = paycheck.init;

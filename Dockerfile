@@ -1,4 +1,4 @@
-FROM mhart/alpine-node:10.7.0
+FROM node:18.5-alpine
 WORKDIR /code/
 COPY package*.json ./
 RUN npm i > /dev/null

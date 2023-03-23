@@ -1,0 +1,26 @@
+version: '2'
+
+networks:
+  funhouse:
+    driver: bridge
+
+services:
+  funhouse:
+    env_file:
+      - .env
+    build: .
+    command: ["npx", "nodemon", "server.js"]
+    ports:
+      - "3000:3000"
+    networks:
+      - funhouse
+    restart: always
+    volumes:
+      - /Users/dillon/git/DATAS:/data
+      - .:/code/
+      - /code/node_modules/
+
+  mongodb:
+    image: 'bitnami/mongodb:3.6.6'
+    networks:
+      - funhouse
