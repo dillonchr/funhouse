@@ -1,16 +1,24 @@
-const db = require('@dillonchr/ephemeraldb');
-const {toError, sendResponse} = require('../utils');
+const { toError, sendResponse } = require("../utils");
+const fs = require("fs/promises");
+const path = require("path");
 
-const getUser = (token, onResponse) => db.findItemInCollection('authorized_apps', {token}, onResponse);
+async function getUser(token, onResponse) {
+  if (null != token && "" !== token && !/\//.test(token)) {
+    const configPath = path.join(process.env.FUNHOUSE_USER_CONFIG_DIR, token);
+    return JSON.parse(await fs.readFile(configPath, { encoding: "utf8" }));
+  }
 
-module.exports = (req, res, next) => {
-    getUser(req.headers['x-api-token'], (err, user) => {
-        if (user) {
-            req.hasAccess = n => user.access.includes('*') || user.access.includes(n);
-            return next();
-        }
-        const status = err ? 500 : 401;
-        const data = err ? toError(err.message) : toError('unauthorized');
-        sendResponse(res, status, data);
-    });
+  throw new Error("Bad Token");
+}
+
+module.exports = async (req, res, next) => {
+  try {
+    const user = await getUser(req.headers["x-api-token"]);
+    if (user) {
+      req.hasAccess = n => user.access.includes("*") || user.access.includes(n);
+      return next();
+    }
+  } catch (err) {
+    sendResponse(res, 500, toError("unauthorized"));
+  }
 };

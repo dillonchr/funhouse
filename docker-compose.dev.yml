@@ -9,10 +9,13 @@ services:
     env_file:
       - .env
     build: .
+    command: ["npx", "nodemon", "server.js"]
     ports:
       - "3000:3000"
-    volumes:
-      - /mnt/wisconsin/funhouse_users:/fh_users
-      - /mnt/wisconsin/bankrupt:/bankrupt
     networks:
       - funhouse
+    restart: always
+    volumes:
+      - /Users/dillon/git/DATAS:/data
+      - .:/code/
+      - /code/node_modules/

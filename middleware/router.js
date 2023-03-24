@@ -1,6 +1,12 @@
 const routes = require('../routes');
 const {toError} = require('../utils');
 
+for (route of routes) {
+  if (route.hasOwnProperty("init")) {
+    route.init();
+  }
+}
+
 module.exports = (req, res) => {
     const matchedRoute = routes.find((route) => {
         return route.shouldRoute(req);

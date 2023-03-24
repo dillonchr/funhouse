@@ -10,15 +10,12 @@
   "author": "",
   "license": "GPL-2.0",
   "dependencies": {
-    "@dillonchr/bankrupt": "^1.1.0",
+    "@dillonchr/bankrupt": "^2.0.2",
     "@dillonchr/bookmancy": "^2.0.5",
     "@dillonchr/cryptonics": "^1.0.0",
     "@dillonchr/dailytext": "^1.0.0",
-    "@dillonchr/ephemeraldb": "^1.0.0",
-    "@dillonchr/fired": "^1.0.0",
     "@dillonchr/gdq": "^1.0.0",
     "@dillonchr/inflation": "^1.0.0",
-    "@dillonchr/wfh": "^1.0.1",
     "connect": "^3.6.6",
     "dotenv": "^4.0.0",
     "raven": "^2.6.2"
