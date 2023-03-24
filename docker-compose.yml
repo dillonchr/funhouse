@@ -13,5 +13,6 @@ services:
       - "3000:3000"
     volumes:
       - /mnt/wisconsin/funhouse_users:/fh_users
+      - /mnt/wisconsin/bankrupt:/bankrupt
     networks:
       - funhouse
