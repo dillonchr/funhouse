@@ -11,5 +11,7 @@ services:
     build: .
     ports:
       - "3000:3000"
+    volumes:
+      - /mnt/wisconsin/funhouse_users:/fh_users
     networks:
       - funhouse
