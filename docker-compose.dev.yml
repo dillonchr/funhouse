@@ -19,8 +19,3 @@ services:
       - /Users/dillon/git/DATAS:/data
       - .:/code/
       - /code/node_modules/
-
-  mongodb:
-    image: 'bitnami/mongodb:3.6.6'
-    networks:
-      - funhouse

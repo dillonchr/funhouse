@@ -14,7 +14,6 @@
     "@dillonchr/bookmancy": "^2.0.5",
     "@dillonchr/cryptonics": "^1.0.0",
     "@dillonchr/dailytext": "^1.0.0",
-    "@dillonchr/ephemeraldb": "^1.0.0",
     "@dillonchr/gdq": "^1.0.0",
     "@dillonchr/inflation": "^1.0.0",
     "connect": "^3.6.6",

@@ -13,10 +13,3 @@ services:
       - "3000:3000"
     networks:
       - funhouse
-
-  mongodb:
-    image: 'bitnami/mongodb:3.6.6'
-    volumes:
-      - /mnt/wisconsin/funhousedb:/bitnami
-    networks:
-      - funhouse
